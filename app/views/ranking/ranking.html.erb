@@ -1,0 +1,33 @@
+<% content_for :head do %>  
+  <title><%= @title %>ページ</title>
+  <meta name="description" content=<%= @title %>ページ。多い順のアイテム上位10個までを表示。>
+<% end %>
+<h1 class="text-center"><%= @title %></h1>
+<div class="container">
+  <div class="container-inner inner-default clearfix">
+    <% rank = 1 %>
+    <% @items.each do |item| %>
+      <table class="table table-striped table-bordered">
+        <div class="image">
+          <div class="img-wrap col-md-1">
+            <p class="ranknum"><%= rank %>位</p>
+          </div>
+          <div class="img-wrap col-md-2">
+            <% if item.large_image.present? %>
+              <%= link_to image_tag(item.large_image, :size => "128x128", alt: item.title), item.detail_page_url %>
+            <% else %>
+              <%= image_tag("no-image.png", :size => "128x128", alt: item.title) %>
+            <% end %>
+          </div>
+        </div>
+        <div class="detail">
+          <p class="title col-md-9">
+            <%= item.title %>
+          </p>
+        </div>
+        <%= render 'items/action' , item: item if logged_in? %>
+      </table>
+      <% rank+=1 %>
+    <% end %>
+  </div>
+</div>
