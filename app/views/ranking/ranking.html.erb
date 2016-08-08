@@ -16,7 +16,7 @@
             <% if item.large_image.present? %>
               <%= link_to image_tag(item.large_image, :size => "128x128", alt: item.title), item.detail_page_url %>
             <% else %>
-              <%= image_tag("no-image.png", :size => "128x128", alt: item.title) %>
+              <%= link_to image_tag("no-image.png", :size => "128x128", alt: item.title), item.detail_page_url  %>
             <% end %>
           </div>
         </div>
